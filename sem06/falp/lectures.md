@@ -197,3 +197,98 @@ mapcar и maplist имеют аналоги, которые не создают 
     (cond ((null lst) result)
           (T (move-to (cdr lst) (cons (car lst) result)))))
 ```
+
+# Лекция 5
+
+> 16.03.2022
+
+5-ая --- любые стандартные функции (допускается неэффективность).
+
+6-7 --- улучшение.
+
+Рекурсивная функция --- функция, вызывающая сама себя.
+
+Хвостовая рекусия может останавливать работу:
+
+1. по одному условию;
+2. по нескольким условиям.
+
+Хорошая рекурсия --- это когда формируем результат на входе, не остается
+недовычисленных результатов.
+
+```lisp
+(defun fun (x)
+    (cond (end_test end_value)
+          (t (fun chanched_x))))
+```
+
+Первый атом:
+
+```
+(defun first_a (lst)
+    (cond ((atom lst) lst)
+          (t (first_a (car lst))))
+```
+
+Первое нечетное:
+
+```
+(defun find_first_odd (lst)
+    (cond ((null lst) nil)
+          ((odd (find_a lst)) (first_a lst))
+          (t (find_first_odd (cdr lst)))))
+```
+
+```
+(defun my_nth (lst n)
+    (cond ((null lst) nil)
+          ((= n 0) (car lst))
+          (t (my_nth (cdr lst) (- n 1)))))
+```
+
+Дополняемая рекурсия (есть доп функция, которая используется доп метод
+обработки рекурсивного вызова).
+
+```
+(defun fun (x)
+    (cond (end_test end_value)
+          (t (add_function add_value
+                           (func changed_x)))))
+```
+
+```
+(defun my_length (lst)
+    (cond ((null lst) 0)
+          (t (+ 1 (my_length (cdr lst))))))
+```
+
+Преобразование многоуровневого списка в одноуровневый:
+
+```
+(defun into-one-level (lst)
+    (cond ((null lst) nil)
+          ((atom lst) (cons lst))
+          (t (append (into-one-level (car lst)
+                      into-one-level (cdr lst))))))
+```
+
+Если в качестве дополнительной функции используется cons, то это
+cons-дополняемая рекурсия.
+
+```
+(defun insert_help (x lst)
+    (cond ((null lst) (list x))
+          ((<= x (cdr lst)) (cons x lst))
+          (t (cons (car lst) (insert_help x (cdr lst))))))
+```
+
+```
+(defun sort_help (lst1 lst2)
+    (cond ((null lst1) lst2)
+          (t (sort_help (cdr lst) (insert_help (car lst1) lst2)))))
+```
+
+```
+(defun sort_ins (lst)
+    (sort_help lst ()))
+```
