@@ -1,0 +1,139 @@
+% table of contents
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hfill\large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill\hfill}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\setlength\cftbeforetoctitleskip{-22pt}
+\setlength\cftaftertoctitleskip{15pt}
+\setcounter{secnumdepth}{4}
+
+% searchable and copyable
+\usepackage{cmap}
+
+% Times New Roman
+\usepackage{pscyr}
+\renewcommand{\rmdefault}{ftm}
+
+% Links
+\def\UrlBreaks{\do\/\do-\do\_}
+\usepackage[nottoc]{tocbibind} % for bib link
+\usepackage[numbers]{natbib}
+\renewcommand*{\bibnumfmt}[1]{#1.}
+%% Captions
+\usepackage[figurename=Рисунок,labelsep=endash,
+            justification=centering]{caption}
+\usepackage{subcaption}
+\usepackage{hyphenat}
+
+
+%% Images
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\newcommand{\img}[4] {
+	\begin{figure}[ht!]
+		\center{
+            \includegraphics[height=#1]{../data/img/#2}
+            \caption{#3}
+            \label{img:#4}
+        }
+	\end{figure}
+}
+
+\newcommand{\twoimg}[7] {
+    \begin{figure}[ht!]
+    \centering
+        \begin{minipage}[h]{0.4\linewidth}
+            \begin{center}
+                \includegraphics[height=#1]{../data/img/#2}
+                \caption{#3}
+                \label{img:#4}
+            \end{center}
+        \end{minipage}
+        \hspace{8ex}
+        \begin{minipage}[h]{0.4\linewidth}
+            \begin{center}
+                \includegraphics[height=#1]{../data/img/#5}
+                \caption{#6}
+                \label{img:#7}
+            \end{center}
+        \end{minipage}
+    \end{figure}
+}
+
+% Lists
+\usepackage{enumitem}
+\renewcommand{\labelitemi}{$-$}
+\setlist{nosep, leftmargin=\parindent, wide}
+%
+%% Comments
+%\usepackage{comment}
+%
+% Text
+\usepackage{amstext}
+\usepackage{ulem}
+\renewcommand{\ULdepth}{1.5pt}
+
+% Formulas
+\DeclareMathOperator*{\argmax}{argmax}
+
+% Tabulars
+\usepackage{threeparttable}
+\usepackage{csvsimple}
+\usepackage{longtable,ltcaption,booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+% PDF
+\usepackage{pdfpages}
+
+% cites
+\usepackage{natbib}
+\bibpunct{[}{]}{;}{n}{}{}
+
+% Listings
+\usepackage{listings}
+\usepackage[newfloat]{minted}
+\usepackage{verbatim}
+\usepackage[framemethod=tikz]{mdframed}
+
+\mdfdefinestyle{mymdstyle}{
+    innerleftmargin=0mm,
+    innerrightmargin=0mm,
+    innertopmargin=-4pt,
+    innerbottommargin=-9pt,
+    splittopskip=\baselineskip,
+    hidealllines=true,
+    middleextra={
+      \node[anchor=west] at (O|-P)
+        {\lstlistingname~\thelstlisting~(продолжение)};
+        },
+    secondextra={
+      \node[anchor=west] at (O|-P)
+        {\lstlistingname~\thelstlisting~(продолжение)};},
+}
+
+\surroundwithmdframed[style=mymdstyle]{lstlisting}
+\newmdenv[style=mymdstyle]{mdlisting}
+
+\newcommand{\mylisting}[4] {
+    \noindent
+    \begin{minipage}{\linewidth}
+        \captionsetup{justification=raggedright,singlelinecheck=off}
+        \begin{lstinputlisting}[
+            caption={#1},
+            label={lst:#2},
+            linerange={#3}
+        ]{#4}
+        \end{lstinputlisting}
+    \end{minipage}
+}
+
+\newcommand{\mybreaklisting}[4]{
+    \begin{mdlisting}
+        \captionsetup{justification=raggedright,singlelinecheck=off}
+        \lstinputlisting[label=lst:#2, caption=#1,
+        linerange=#3]{}
+    \end{mdlisting}
+}
+
