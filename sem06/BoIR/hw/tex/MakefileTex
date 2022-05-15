@@ -4,7 +4,8 @@ texReport : build move
 
 build : report.tex
 	pdflatex -shell-escape report.tex
-	bibtex report
+	biber report
+	biber report
 	pdflatex -shell-escape report.tex
 	pdflatex -shell-escape report.tex
 
@@ -12,8 +13,16 @@ move : report.pdf
 	-mkdir ../pdf           
 	mv report.pdf ../pdf/ 
 	-mkdir ../out        
-	-mv *.aux *.log *.bbl *.blg *.dvi *.out *.toc ../out/ 
+	-mv *.aux ../out/
+	-mv *.log ../out/
+	-mv *.bbl ../out/
+	-mv *.blg ../out/
+	-mv *.dvi ../out/
+	-mv *.out ../out/
+	-mv *.toc ../out/
+	-mv *.bcf ../out/
+	-mv *.xml ../out/
 
 clear :
 	-rm -rf ../out/ ../pdf/
-	-rm *.aux *.log *.bbl *.blg *.dvi *.out *.pdf
+	-rm *.aux *.log *.bbl *.blg *.dvi *.out *.pdf *.bcf *.toc *.xml

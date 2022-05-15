@@ -16,9 +16,10 @@
 
 % Links
 \def\UrlBreaks{\do\/\do-\do\_}
-\usepackage[nottoc]{tocbibind} % for bib link
-\usepackage[numbers]{natbib}
-\renewcommand*{\bibnumfmt}[1]{#1.}
+%\usepackage[nottoc]{tocbibind} % for bib link
+%\usepackage[numbers]{natbib}
+%\renewcommand*{\bibnumfmt}[1]{#1.}
+
 %% Captions
 \usepackage[figurename=Рисунок,labelsep=endash,
             justification=centering]{caption}
@@ -88,8 +89,9 @@
 \usepackage{pdfpages}
 
 % cites
-\usepackage{natbib}
-\bibpunct{[}{]}{;}{n}{}{}
+\addbibresource{biblio.bib}
+%\usepackage{natbib}
+%\bibpunct{[}{]}{;}{n}{}{}
 
 % Listings
 \usepackage{listings}

@@ -10,3 +10,5 @@ open :
 
 clear :
 	rm -rf ./pdf/ ./out/
+	cd ./tex && make -f MakefileTex clear
+	
