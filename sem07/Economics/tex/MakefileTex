@@ -1,0 +1,17 @@
+.PHONY : build move
+
+texReport : build move
+
+build : Economics.tex
+	pdflatex -shell-escape Economics.tex
+	pdflatex -shell-escape Economics.tex
+	pdflatex -shell-escape Economics.tex
+
+move : Economics.pdf
+	mv Economics.pdf ../
+	-mkdir ../out        
+	-mv *.aux *.log *.bbl *.blg *.dvi *.out *.toc ../out/ 
+
+clear :
+	-rm -rf ../out/ ../Economics.pdf
+	-rm *.aux *.log *.bbl *.blg *.dvi *.out *.pdf
